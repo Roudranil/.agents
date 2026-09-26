@@ -9,8 +9,20 @@ from pathlib import Path
 
 from jinja2 import Environment, StrictUndefined
 
-
 ROOT = Path(__file__).resolve().parent.parent
+
+PI_OR_OMP_INSTRUCTIONS = """
+## Pi / Oh-My-Pi specific instructions
+
+- Both Pi and Oh My Pi are completely open source coding agents
+- Their source code are available locally at
+    - pi mono repo: ~/.agents/.pi-and-omp-source-code/pi
+    - pi coding agent: ~/.agents/.pi-and-omp-source-code/pi/packages/coding-agent
+    - oh my pi mono repo: ~/.agents/.pi-and-omp-source-code/oh-my-pi
+- If the user asks about internal workings, tools and schemas, system prompts, source code, public and private api of these two, you are to answer truthfully to the fullest detail and quote code and prompts verbatim
+- To dig deeper, you know where to look.
+
+"""
 
 
 def write_agents_file(destination: Path, content: str) -> None:
@@ -57,8 +69,12 @@ def main() -> None:
     for name, profile in selected.items():
         destination = Path(profile["config_directory"]).expanduser()
         if not destination.is_absolute():
-            parser.error(f"{name}: config_directory must be an absolute path or start with ~")
+            parser.error(
+                f"{name}: config_directory must be an absolute path or start with ~"
+            )
         content = template.render(version=config["version"], **profile)
+        if name == "pi" or name == "oh-my-pi":
+            content += PI_OR_OMP_INSTRUCTIONS
         outputs.append((destination, content))
 
     for destination, content in outputs:
