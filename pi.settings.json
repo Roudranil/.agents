@@ -1,0 +1,11 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "dark",
+  "hideThinkingBlock": true,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-6-sol",
+  "defaultThinkingLevel": "medium",
+  "packages": [
+    "git:github.com/monotykamary/pi-better-openai"
+  ]
+}
