@@ -17,4 +17,113 @@ Some details about me (the user). Use it to be informed about my preferences
 - **existing skillset by training/profession**: Math, Stat, ML in depth. Python
 - **existing skillset by hobbies**: R, LaTeX, bash, linux, random coding shit but not that capable
 
+## Coding Style Guidelines
+
+### General Principles
+
+- Clean, readable, maintainable code above all
+- No over-engineering for single-use or simple code
+- No unnecessary abstractions, inheritance, or method overloading for single-use code
+- No repeated code blocks - DRY
+- Always look at existing implementation first; make the smallest diff possible
+- No non-Unicode characters (anything that can't be typed on a normal keyboard) in source code, comments, or docstrings
+
+### Structure
+
+| Context        | Rule                                                |
+| -------------- | --------------------------------------------------- |
+| `.ipynb` files | All imports at the top of the file                  |
+| New files      | Check existing patterns before introducing new ones |
+| Diffs          | Fewest lines changed that achieves the goal         |
+
+### General writing principles
+
+- Always use **NumPy** style docstrings
+- Scope: extensive — cover **what**, **why**, **what not to do**, **how**
+- No meta-commentary ("updated function", "as requested", "improved version")
+- Add lower case comments everywhere, liberally - assume future reader has no context
+- Comments in royal first person (remove the I, me, am , we from the comments. Imperative tone)
+- No meta-commentary from the assistant
+- Type hints are required on all function signatures (params + return type)
+- Use `print` statements and logging wherever useful for tracing execution
+- Prefer `logging` over `print` in library/module code; either is fine in notebooks/scripts
+
+### Formatting and linting
+
+- Run `ruff` or `black` on every file where applicable, whichever is available
+- `ruff` preferred when both are present
+
+
+## Git Commit Discipline
+
+### Format
+
+```
+<type>[(<scope>)][!]: <subject>
+
+[body]
+
+[footer(s)]
+```
+
+`!` = breaking change (SemVer MAJOR). Scope: short lowercase (`api`, `auth`, `db`, `cli`, `ui`, `config`).
+
+### Types
+
+| Type       | When to use                                                             | SemVer |
+| ---------- | ----------------------------------------------------------------------- | ------ |
+| `feat`     | New feature or behavior                                                 | MINOR  |
+| `fix`      | Bug fix                                                                 | PATCH  |
+| `refactor` | No bug fix, no feature                                                  | —      |
+| `perf`     | Performance improvement                                                 | PATCH  |
+| `test`     | Adding or correcting tests                                              | —      |
+| `docs`     | Documentation only                                                      | —      |
+| `style`    | Formatting, whitespace — no logic change                                | —      |
+| `build`    | Build system or dependency changes                                      | —      |
+| `ci`       | CI config changes                                                       | —      |
+| `chore`    | Tooling, deps, config — no production code                              | —      |
+| `agent`    | Changes to claude or other coding agents configuration files or folders | —      |
+| `revert`   | Revert a prior commit (ref SHA in body)                                 | varies |
+
+### Subject Line (hard rules)
+
+- Imperative mood: "add", "fix", "remove" — not "added", "fixes"
+- No capital after the colon
+- No trailing period
+- 50 characters max
+- No filler words ("just", "some", "various", "minor")
+
+### Body
+
+- Blank line after subject; wrap at 72 chars
+- Explain **why**, not what; use bullets for multi-point rationale
+- Only include when subject is insufficient
+- Even body is optional if change is not that significant
+
+### Footer
+
+- `BREAKING CHANGE: <desc>` — mandatory for any breaking change
+- `Refs: #42` — non-closing issue references
+
+**DO NOT ADD AI MODEL CO-AUTHOR GIT COMMIT ATTRIBUTION. IT IS AUTOMATED AND WILL BE ADDED APPROPRIATELY AND PROGRAMMATICALLY**
+
+### Atomic Commit Rules (non-negotiable)
+
+- One logical change per commit — one fix, one feature slice, one refactor. Changes must be committed at the file level. File chunks, hunks, patches SHOULD NOT be committed.
+- All files in the commit must belong to that one logical change
+- Tests travel with the change they cover — they only go in a seperate commit if changes for tests are larger than the limits mentioned below
+- Documentation changes may go in a separate `docs:` commit
+- Never commit a broken state (every commit must pass CI)
+- If commit message needs "and" -> split the commit
+- If using GitHub issues, each commit covers at most one issue
+- If > 7 files or > 100 lines changed -> split into different commits (hard limit)
+
+### Never Commit
+
+- Secrets, API keys, tokens
+- `.DS_Store` and OS metadata
+- Generated files not tracked by project convention
+- Lock file changes from unrelated dep drift
+- Reformatting of files you didn't logically touch
+- Multiple unrelated fixes bundled as "misc fixes"
 
