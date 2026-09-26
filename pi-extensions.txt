@@ -1,0 +1,10 @@
+npm:@narumitw/pi-btw
+npm:@narumitw/pi-caffeinate
+npm:@narumitw/pi-usage
+npm:@narumitw/pi-analytics
+npm:pi-observational-memory
+git:github.com/MasuRii/pi-rtk-optimizer
+git:github.com/monotykamary/pi-better-openai
+npm:pi-web-access
+npm:pi-subagents
+# npm:pi-mcp-adapter
