@@ -1,3 +1,4 @@
-.omp-docs-repo
-.pi.git
+.pi-and-omp-source-code
 .other-pi-configs
+.pi-extension-playground
+node_modules/
