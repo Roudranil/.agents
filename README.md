@@ -1,6 +1,6 @@
 # .agents
 
-This repo contains my personal agents configuration dir. My coding `cli` of choice right now is [`oh-my-pi`](https://github.com/can1357/oh-my-pi.git).
+This repo contains my personal agents configuration dir. My coding `cli` of choice right now is [`oh-my-pi`](https://github.com/can1357/oh-my-pi.git). General configuration for this repo will be at [docs](./docs/)
 
 ## How to refresh oh my pi documentation?
 
